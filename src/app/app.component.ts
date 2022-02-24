@@ -45,6 +45,10 @@ export class AppComponent {
       periodoAl: new FormControl('2022-12', [Validators.required]),
     });
 
+    this.form.valueChanges.subscribe(() => {
+      if (this.form.invalid) this.searched = false;
+    });
+
     this.selectedApps = this.APPS;
     this.APPS = [];
     this.submit();
@@ -60,6 +64,7 @@ export class AppComponent {
   removeApp(value: string) {
     this.selectedApps = this.selectedApps.filter((v) => v !== value);
     this.APPS.push(value);
+    if (this.selectedApps.length === 0) this.searched = false;
   }
 
   search: OperatorFunction<string, readonly string[]> = (
@@ -92,6 +97,6 @@ export class AppComponent {
   }
 
   dettaglio() {
-    this.mostraDettaglio = true;
+    this.mostraDettaglio = !this.mostraDettaglio;
   }
 }
