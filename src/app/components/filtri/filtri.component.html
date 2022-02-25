@@ -1,0 +1,89 @@
+<form [formGroup]="form" (submit)="submit()">
+  <div class="row">
+    <div class="col-4">
+      <label for="typeahead-focus">Applicazioni:</label>
+      <input
+        id="typeahead-focus"
+        type="text"
+        class="form-control"
+        formControlName="apps"
+        [ngbTypeahead]="search"
+        (selectItem)="selectApp($event)"
+        (focus)="focus$.next($any($event).target.value)"
+        (click)="click$.next($any($event).target.value)"
+        [resultFormatter]="formatter"
+        #instance="ngbTypeahead"
+      />
+    </div>
+    <div class="col-4">
+      <label for="typeahead-focus">Periodo dal:</label>
+      <input
+        type="month"
+        name="periodoDal"
+        id="periodoDal"
+        [max]="form.controls.periodoAl.value"
+        formControlName="periodoDal"
+        class="form-control"
+      />
+    </div>
+    <div class="col-4">
+      <label for="typeahead-focus">Periodo al:</label>
+      <input
+        type="month"
+        name="periodoAl"
+        id="periodoAl"
+        formControlName="periodoAl"
+        [min]="form.controls.periodoDal.value"
+        class="form-control"
+      />
+    </div>
+  </div>
+  <div
+    class="row row-cols-1 row-cols-md-3 mt-3"
+    *ngIf="selectedApps && selectedApps.length > 0"
+  >
+    <div class="col my-2" *ngFor="let app of selectedApps; let i = index">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between">
+            <h5 class="card-title">{{ app.label }}</h5>
+            <h6 style="cursor: pointer" (click)="removeApp(app)">X</h6>
+          </div>
+
+          <div class="row row-cols-3 row-cols-md-2">
+            <div
+              class="col"
+              *ngFor="let stato of app.stati"
+              [formGroupName]="app.label"
+            >
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                  [formControlName]="'stato_' + stato.id"
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  {{ stato.desc }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12 d-flex justify-content-end">
+      <button
+        class="btn btn-primary"
+        [disabled]="form.invalid || !selectedApps || selectedApps.length === 0"
+        type="submit"
+      >
+        Cerca
+      </button>
+    </div>
+  </div>
+</form>

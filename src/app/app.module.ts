@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FiltriComponent } from './components/filtri/filtri.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FiltriComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

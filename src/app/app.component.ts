@@ -13,6 +13,7 @@ import {
   filter,
   map,
 } from 'rxjs/operators';
+import { App } from './models/app';
 
 @Component({
   selector: 'app-root',
@@ -31,72 +32,22 @@ export class AppComponent {
     'Rateizzazioni',
   ];
 
-  selectedApps: string[] = [];
+  selectedApps: App[] = [];
 
-  @ViewChild('instance', { static: true }) instance!: NgbTypeahead;
-  focus$ = new Subject<string>();
-  click$ = new Subject<string>();
-
-  form: FormGroup;
-  constructor(private _formBuilder: FormBuilder) {
-    this.form = this._formBuilder.group({
-      apps: new FormControl(null, []),
-      periodoDal: new FormControl('2022-01', [Validators.required]),
-      periodoAl: new FormControl('2022-12', [Validators.required]),
-    });
-
-    this.form.valueChanges.subscribe(() => {
-      if (this.form.invalid) this.searched = false;
-    });
-
-    this.selectedApps = this.APPS;
-    this.APPS = [];
-    this.submit();
-  }
-
-  selectApp($event: any) {
-    $event.preventDefault();
-    this.selectedApps.push($event.item);
-    this.APPS = this.APPS.filter((v) => v !== $event.item);
-    this.form.controls.apps.patchValue(null);
-  }
-
-  removeApp(value: string) {
-    this.selectedApps = this.selectedApps.filter((v) => v !== value);
-    this.APPS.push(value);
-    if (this.selectedApps.length === 0) this.searched = false;
-  }
-
-  search: OperatorFunction<string, readonly string[]> = (
-    text$: Observable<string>
-  ) => {
-    const debouncedText$ = text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged()
-    );
-    const clicksWithClosedPopup$ = this.click$.pipe(
-      filter(() => !this.instance.isPopupOpen())
-    );
-    const inputFocus$ = this.focus$;
-
-    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map((term) =>
-        (term === ''
-          ? this.APPS
-          : this.APPS.filter(
-              (v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1
-            )
-        ).slice(0, 10)
-      )
-    );
-  };
-
-  submit() {
-    console.log(this.form.value);
-    this.searched = true;
-  }
+  constructor() {}
 
   dettaglio() {
     this.mostraDettaglio = !this.mostraDettaglio;
+  }
+
+  showResult(result: any) {
+    if (result) {
+      this.searched = true;
+      this.selectedApps = result.selectedApps;
+    }
+  }
+
+  getClass(index: number, plus: number) {
+    return 'order-' + (index + plus);
   }
 }
