@@ -1,121 +1,129 @@
 <div class="container">
-	<app-filtri (emitSearch)="showResult($event)">
-	</app-filtri>
-	<ng-container *ngIf="searched">
-		<div class="d-flex justify-content-around mt-3">
-			<div class="card h-100 bg-primary" style="width: 12rem; height: 8rem">
-				<div class="card-body text-center">
-					<p class="card-text">Totale</p>
-					<h5 class="card-title">15000</h5>
-				</div>
-			</div>
-			<div class="card h-100 bg-secondary" style="width: 12rem; height: 8rem">
-				<div class="card-body text-center">
-					<p class="card-text">Parziale</p>
-					<h5 class="card-title">8000</h5>
-				</div>
-			</div>
-			<div class="card h-100" style="width: 12rem; height: 8rem">
-				<div class="card-body text-center">
-					<p class="card-text">Portale online</p>
-					<h5 class="card-title">3000</h5>
-				</div>
-			</div>
-			<div class="card h-100" style="width: 12rem; height: 8rem">
-				<div class="card-body text-center">
-					<p class="card-text">Agenzie</p>
-					<h5 class="card-title">5000</h5>
-				</div>
-			</div>
-			<div class="card h-100" style="width: 12rem; height: 8rem">
-				<div class="card-body text-center">
-					<p class="card-text">Strutture territoriali</p>
-					<h5 class="card-title">3000</h5>
-				</div>
-			</div>
-			<div class="card h-100" style="width: 12rem; height: 8rem">
-				<div class="card-body text-center">
-					<p class="card-text">Regione</p>
-					<h5 class="card-title">5000</h5>
-				</div>
-			</div>
-		</div>
-		<div class="row mt-3">
-			<div class="col-12 border text-center" style="height: 12rem">
-        Grafico (lista degli stati con i totali)
+  <app-filtri (emitSearch)="showResult($event)"> </app-filtri>
+  <ng-container *ngIf="searched">
+    <div class="d-flex justify-content-around mt-3">
+      <div class="card h-100 bg-primary" style="width: 12rem; height: 8rem">
+        <div class="card-body text-center">
+          <p class="card-text">Totale</p>
+          <h5 class="card-title">15000</h5>
+        </div>
       </div>
-		</div>
-		<div class="row">
-			<ng-container *ngFor="let app of selectedApps; let i = index">
-				<div [ngClass]="{'col-12':app.detail,'col-4':!app.detail}">
-					<div class="row mt-3">
-						<div class="my-2" [ngClass]="{'col-12':!app.detail,'col-4':app.detail}">
-							<div class="card h-100">
-								<div class="card-body">
-									<div class="d-flex align-items-center justify-content-between">
-										<h5 class="card-title">
-                  {{ app.label }}
-                </h5>
-										<h5 class="card-text">#{{ 1387 * (i + 1) }}</h5>
-									</div>
-									<div class="border d-flex align-items-center justify-content-center" style="height: 20rem; cursor: pointer" (click)="app.detail = !app.detail">
-                Grafico a torta
+      <div class="card h-100 bg-secondary" style="width: 12rem; height: 8rem">
+        <div class="card-body text-center">
+          <p class="card-text">Parziale</p>
+          <h5 class="card-title">8000</h5>
+        </div>
+      </div>
+      <div class="card h-100" style="width: 12rem; height: 8rem">
+        <div class="card-body text-center">
+          <p class="card-text">Portale online</p>
+          <h5 class="card-title">3000</h5>
+        </div>
+      </div>
+      <div class="card h-100" style="width: 12rem; height: 8rem">
+        <div class="card-body text-center">
+          <p class="card-text">Agenzie</p>
+          <h5 class="card-title">5000</h5>
+        </div>
+      </div>
+      <div class="card h-100" style="width: 12rem; height: 8rem">
+        <div class="card-body text-center">
+          <p class="card-text">Strutture territoriali</p>
+          <h5 class="card-title">3000</h5>
+        </div>
+      </div>
+      <div class="card h-100" style="width: 12rem; height: 8rem">
+        <div class="card-body text-center">
+          <p class="card-text">Regione</p>
+          <h5 class="card-title">5000</h5>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 border text-center" style="height: 12rem">
+        Grafico a barre orizzontale (lista degli stati con i totali)
+      </div>
+    </div>
+    <div class="row">
+      <ng-container *ngFor="let app of selectedApps; let i = index">
+        <div [ngClass]="{ 'col-12': app.detail, 'col-4': !app.detail }">
+          <div class="row mt-3">
+            <div
+              class="my-2"
+              [ngClass]="{ 'col-12': !app.detail, 'col-4': app.detail }"
+            >
+              <div class="card h-100">
+                <div class="card-body">
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <h5 class="card-title">
+                      {{ app.label }}
+                    </h5>
+                    <h5 class="card-text">#{{ 1387 * (i + 1) }}</h5>
+                  </div>
+                  <div
+                    class="border d-flex align-items-center justify-content-center"
+                    style="height: 20rem; cursor: pointer"
+                    (click)="app.detail = !app.detail"
+                  >
+                    Grafico a torta
+                  </div>
+                </div>
               </div>
-								</div>
-							</div>
-						</div>
-						<div class="col-8 my-2" *ngIf="app.detail">
-							<h5>Dettaglio istanze {{ app.label }}</h5>
-							<table class="table table-striped table-hover">
-								<thead>
-									<tr class="table-primary">
-										<th scope="col">Numero Istanza</th>
-										<th scope="col">Tipo Istanza</th>
-										<th scope="col">Data Creazione</th>
-										<th scope="col">Targa/Telaio</th>
-										<th scope="col">Tipo Veicolo</th>
-										<th scope="col">Codice Fiscale Richiedente</th>
-										<th scope="col">Anno di Riferimento</th>
-										<th scope="col">Stato Istanza</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">AA000AA0000001</th>
-										<td>Tipo 1</td>
-										<td>01/01/2000</td>
-										<td>AA000AA</td>
-										<td>Autoveicolo</td>
-										<td>NCLFNC92E62G702U</td>
-										<td>2000</td>
-										<td>Stato</td>
-									</tr>
-									<tr>
-										<th scope="row">AA000AA0000001</th>
-										<td>Tipo 1</td>
-										<td>01/01/2000</td>
-										<td>AA000AA</td>
-										<td>Autoveicolo</td>
-										<td>NCLFNC92E62G702U</td>
-										<td>2000</td>
-										<td>Stato</td>
-									</tr>
-									<tr>
-										<th scope="row">AA000AA0000001</th>
-										<td>Tipo 1</td>
-										<td>01/01/2000</td>
-										<td>AA000AA</td>
-										<td>Autoveicolo</td>
-										<td>NCLFNC92E62G702U</td>
-										<td>2000</td>
-										<td>Stato</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</ng-container>
-		</div>
-	</ng-container>
+            </div>
+            <div class="col-8 my-2" *ngIf="app.detail">
+              <h5>Dettaglio istanze {{ app.label }}</h5>
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr class="table-primary">
+                    <th scope="col">Numero Istanza</th>
+                    <th scope="col">Tipo Istanza</th>
+                    <th scope="col">Data Creazione</th>
+                    <th scope="col">Targa/Telaio</th>
+                    <th scope="col">Tipo Veicolo</th>
+                    <th scope="col">Codice Fiscale Richiedente</th>
+                    <th scope="col">Anno di Riferimento</th>
+                    <th scope="col">Stato Istanza</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">AA000AA0000001</th>
+                    <td>Tipo 1</td>
+                    <td>01/01/2000</td>
+                    <td>AA000AA</td>
+                    <td>Autoveicolo</td>
+                    <td>NCLFNC92E62G702U</td>
+                    <td>2000</td>
+                    <td>Stato</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">AA000AA0000001</th>
+                    <td>Tipo 1</td>
+                    <td>01/01/2000</td>
+                    <td>AA000AA</td>
+                    <td>Autoveicolo</td>
+                    <td>NCLFNC92E62G702U</td>
+                    <td>2000</td>
+                    <td>Stato</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">AA000AA0000001</th>
+                    <td>Tipo 1</td>
+                    <td>01/01/2000</td>
+                    <td>AA000AA</td>
+                    <td>Autoveicolo</td>
+                    <td>NCLFNC92E62G702U</td>
+                    <td>2000</td>
+                    <td>Stato</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
 </div>
