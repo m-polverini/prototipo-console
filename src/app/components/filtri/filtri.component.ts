@@ -69,7 +69,7 @@ export class FiltriComponent implements OnInit {
   removeApp(app: App) {
     this.selectedApps = this.selectedApps.filter((v) => v !== app);
     this.APPS.push(app);
-    if (this.selectedApps.length === 0) this.searched = false;
+    if (this.selectedApps.length === 0) this.emitSearch.next(null);
     this.form.removeControl(app.label);
   }
 

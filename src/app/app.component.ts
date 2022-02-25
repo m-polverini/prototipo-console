@@ -44,6 +44,9 @@ export class AppComponent {
     if (result) {
       this.searched = true;
       this.selectedApps = result.selectedApps;
+    } else {
+      this.searched = false;
+      this.selectedApps = [];
     }
   }
 
