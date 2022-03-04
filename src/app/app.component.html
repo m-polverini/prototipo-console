@@ -2,42 +2,51 @@
   <app-filtri (emitSearch)="showResult($event)"> </app-filtri>
   <ng-container *ngIf="searched">
     <div class="d-flex justify-content-around mt-3">
-      <div class="card h-100 bg-primary" style="width: 12rem; height: 8rem">
+      <div class="card h-100 m-1 bg-primary" style="width: 12rem; height: 8rem">
         <div class="card-body text-center">
           <p class="card-text">Totale</p>
-          <h5 class="card-title">15000</h5>
+          <h5 class="card-title">16000</h5>
         </div>
       </div>
-      <div class="card h-100 bg-secondary" style="width: 12rem; height: 8rem">
+      <div
+        class="card h-100 m-1 bg-secondary"
+        style="width: 12rem; height: 8rem"
+      >
         <div class="card-body text-center">
           <p class="card-text">Parziale</p>
-          <h5 class="card-title">8000</h5>
+          <h5 class="card-title">13000</h5>
         </div>
       </div>
-      <div class="card h-100" style="width: 12rem; height: 8rem">
+      <div class="card h-100 m-1" style="width: 12rem; height: 8rem">
         <div class="card-body text-center">
           <p class="card-text">Portale online</p>
           <h5 class="card-title">3000</h5>
         </div>
       </div>
-      <div class="card h-100" style="width: 12rem; height: 8rem">
+      <div class="card h-100 m-1" style="width: 12rem; height: 8rem">
         <div class="card-body text-center">
           <p class="card-text">Agenzie</p>
           <h5 class="card-title">5000</h5>
         </div>
       </div>
-      <div class="card h-100" style="width: 12rem; height: 8rem">
+      <div class="card h-100 m-1" style="width: 12rem; height: 8rem">
         <div class="card-body text-center">
           <p class="card-text">Strutture territoriali</p>
           <h5 class="card-title">3000</h5>
         </div>
       </div>
-      <div class="card h-100" style="width: 12rem; height: 8rem">
+      <div class="card h-100 m-1" style="width: 12rem; height: 8rem">
         <div class="card-body text-center">
           <p class="card-text">Regione</p>
           <h5 class="card-title">5000</h5>
         </div>
       </div>
+    </div>
+    <div class="row mt-3">
+      <p class="text-right w-100">
+        <button class="btn btn-primary">Download Excel</button>
+        <button class="btn btn-primary ml-2">Download Csv</button>
+      </p>
     </div>
     <div class="row mt-3">
       <div class="col-12 border text-center" style="height: 12rem">
